@@ -3,16 +3,25 @@ package com.java90apps.spotifyrebus.data.dto
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class ChannelsRecommendedDTO(
+data class PlayListDTO(
     @Expose
     @SerializedName("body")
-    val body: List<Channel>
+    val body: PlayListBody
 )
 
-data class Channel(
+data class PlayListBody(
+    @Expose
+    @SerializedName("audio_clips")
+    val audio_clips: List<AudioClip>
+)
+
+data class AudioClip(
     @Expose
     @SerializedName("description")
     val description: String,
+    @Expose
+    @SerializedName("duration")
+    val duration: Double,
     @Expose
     @SerializedName("id")
     val id: Int,
@@ -24,18 +33,14 @@ data class Channel(
     val updated_at: String,
     @Expose
     @SerializedName("urls")
-    val urls: ChannelUrls
+    val urls: Urls
 )
 
-data class ChannelUrls(
+data class Urls(
     @Expose
-    @SerializedName("logo_image")
-    val logo_image: LogoImage
-)
-
-data class LogoImage(
+    @SerializedName("high_mp3")
+    val high_mp3: String,
     @Expose
-    @SerializedName("original")
-    val original: String
+    @SerializedName("image")
+    val image: String
 )
-
