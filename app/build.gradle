@@ -3,10 +3,17 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
 android {
     compileSdk 32
 
     defaultConfig {
+        buildConfigField("String", "CONSUMER_KEY", apikeyProperties['CONSUMER_KEY'])
+        buildConfigField("String", "CONSUMER_SECRET", apikeyProperties['CONSUMER_SECRET'])
+
         applicationId "com.java90apps.spotifyrebus"
         minSdk 23
         targetSdk 32
@@ -22,6 +29,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -33,11 +46,38 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.6.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // Core
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin"
+    implementation "androidx.core:core-ktx:$core_ktx"
+    implementation "androidx.appcompat:appcompat:$app_compat"
+    implementation "com.google.android.material:material:$material"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+
+
+    implementation "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+    implementation"com.google.dagger:hilt-android:$hilt_version"
+    implementation "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    //Coroutines
+    implementation"org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+
+    // RepeatOnLifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_runtime"
+
+    // Navigation
+    implementation"androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // Gson
+    implementation"com.google.code.gson:gson:$converter_gson"
+
+    // Test
+    implementation "junit:junit:$jUnit"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    implementation "androidx.test:rules:$testRules_version"
+    implementation"org.mockito:mockito-inline:$mockito_inline_version"
+    //implementation "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version"
+    implementation "androidx.arch.core:core-testing:$core_test_version"
+
 }
