@@ -12,10 +12,11 @@ buildscript {
     ext.material = "1.6.1"
     ext.constraint_layout = "2.1.4"
     ext.jUnit = "4.13.2"
-    ext.mockito_inline_version = "3.4.4"
+    ext.mockito_inline_version = "3.7.0"
     ext.testRules_version = "1.4.0"
     ext.core_test_version = "2.1.0"
     ext.retrofit_version = "2.9.0"
+    ext.okhttp3_version = "4.9.0"
 
     repositories {
         google()
