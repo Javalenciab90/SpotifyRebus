@@ -2,17 +2,24 @@ package com.java90apps.spotifyrebus.data.dto
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.java90apps.spotifyrebus.domain.models.ChannelModel
+import com.java90apps.spotifyrebus.domain.models.ChannelUrlsModel
+import com.java90apps.spotifyrebus.domain.models.ChannelsRecommendedModel
+import com.java90apps.spotifyrebus.domain.models.LogoImageModel
 
 data class ChannelsRecommendedDTO(
     @Expose
-    @SerializedName("api_warning")
-    val api_warning: String,
-    @Expose
     @SerializedName("body")
-    val body: List<Body>
-)
+    val body: List<ChannelDTO>
+) {
+    fun toChannelRecommendedModel() : ChannelsRecommendedModel {
+        return ChannelsRecommendedModel(
+            body = body.map { it.toChannelModel() }
+        )
+    }
+}
 
-data class Body(
+data class ChannelDTO(
     @Expose
     @SerializedName("description")
     val description: String,
@@ -27,18 +34,40 @@ data class Body(
     val updated_at: String,
     @Expose
     @SerializedName("urls")
-    val urls: Urls
-)
+    val urls: ChannelUrlsDTO
+) {
+    fun toChannelModel() : ChannelModel {
+        return ChannelModel(
+            description = description,
+            id = id,
+            title = title,
+            updated_at = updated_at,
+            urls = urls.toChannelUrlsModel()
+        )
+    }
+}
 
-data class Urls(
+data class ChannelUrlsDTO(
     @Expose
     @SerializedName("logo_image")
-    val logo_image: LogoImage
-)
+    val logo_image: LogoImageDTO
+) {
+    fun toChannelUrlsModel() :  ChannelUrlsModel {
+        return ChannelUrlsModel(
+            logo_image = logo_image.toLogoImageModel()
+        )
+    }
+}
 
-data class LogoImage(
+data class LogoImageDTO(
     @Expose
     @SerializedName("original")
     val original: String
-)
+) {
+   fun toLogoImageModel() : LogoImageModel {
+        return LogoImageModel(
+            original = original
+        )
+   }
+}
 
