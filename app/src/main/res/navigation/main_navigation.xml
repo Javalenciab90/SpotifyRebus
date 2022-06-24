@@ -28,5 +28,16 @@
         <argument
             android:name="channel_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_channelFragment_to_playClipFragment"
+            app:destination="@id/playClipFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playClipFragment"
+        android:name="com.java90apps.spotifyrebus.ui.fragments.PlayClipFragment"
+        android:label="PlayClipFragment" >
+        <argument
+            android:name="clip_to_play"
+            app:argType="com.java90apps.spotifyrebus.domain.models.AudioClipModel" />
     </fragment>
 </navigation>

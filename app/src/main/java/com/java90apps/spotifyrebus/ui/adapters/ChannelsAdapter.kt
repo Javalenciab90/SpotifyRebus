@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.java90apps.spotifyrebus.databinding.ItemPodcastLayoutBinding
 import com.java90apps.spotifyrebus.domain.models.ChannelModel
-import java.text.SimpleDateFormat
 
 class ChannelsAdapter(
     private val onItemClicked: (Int) -> Unit

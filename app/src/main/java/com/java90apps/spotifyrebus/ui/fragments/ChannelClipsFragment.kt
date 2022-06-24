@@ -1,8 +1,8 @@
 package com.java90apps.spotifyrebus.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,10 +11,13 @@ import com.java90apps.spotifyrebus.domain.base.BaseFragment
 import com.java90apps.spotifyrebus.domain.extensions.hideProgressBar
 import com.java90apps.spotifyrebus.domain.extensions.hideRetryButton
 import com.java90apps.spotifyrebus.domain.extensions.hideTextError
+import com.java90apps.spotifyrebus.domain.extensions.navigateWithDirection
 import com.java90apps.spotifyrebus.domain.extensions.showProgressBar
 import com.java90apps.spotifyrebus.domain.extensions.showRetryButton
 import com.java90apps.spotifyrebus.domain.extensions.showTextError
+import com.java90apps.spotifyrebus.domain.models.AudioClipModel
 import com.java90apps.spotifyrebus.domain.models.StateResult
+import com.java90apps.spotifyrebus.ui.adapters.PlayListAdapter
 import com.java90apps.spotifyrebus.ui.viewmodels.ChannelPlayListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +31,7 @@ class ChannelClipsFragment : BaseFragment<FragmentChannelClipsBinding>(FragmentC
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getPlayListChannel(args.channelId)
-        //setUpRecyclerView()
+        setUpRecyclerView()
         setUpObservers()
         setUpListeners()
     }
@@ -36,7 +39,14 @@ class ChannelClipsFragment : BaseFragment<FragmentChannelClipsBinding>(FragmentC
     private fun setUpRecyclerView() {
         binding.rvClips.apply {
             layoutManager = LinearLayoutManager(requireContext())
+            adapter = PlayListAdapter() {
+                playClip(it)
+            }
         }
+    }
+
+    private fun playClip(clip: AudioClipModel) {
+        navigateWithDirection(ChannelClipsFragmentDirections.actionChannelFragmentToPlayClipFragment(clip))
     }
 
     private fun setUpListeners() {
@@ -63,10 +73,13 @@ class ChannelClipsFragment : BaseFragment<FragmentChannelClipsBinding>(FragmentC
                             tvClipsError.hideTextError()
                             btnLoadClipsAgain.hideRetryButton()
 
-                            // TODO: Create and  Set the adpater
+                            rvClips.adapter?.let { adapter ->
+                                (adapter as PlayListAdapter).submitList(result.data)
+                            }
                         }
                     }
                     is StateResult.Failed -> {
+                        Toast.makeText(requireContext(), "No se puedo encontrar la lista!. Intenta nuevamente!", Toast.LENGTH_LONG).show()
                         with(binding) {
                             pbClips.showProgressBar()
                             tvClipsError.showTextError()
