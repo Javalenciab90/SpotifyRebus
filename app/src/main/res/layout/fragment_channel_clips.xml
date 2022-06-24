@@ -6,11 +6,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv_channels_recommended"
+        android:id="@+id/tv_channel_clips"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:text="CANALES RECOMENDADOS:"
+        android:text="LISTA REPRODUCCIÓN:"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_channels"
+        android:id="@+id/rv_clips"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
@@ -31,41 +31,43 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_channels_recommended" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_channel_clips" />
 
     <ProgressBar
-        android:id="@+id/pb_channels"
+        android:id="@+id/pb_clips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_channels_recommended" />
+        app:layout_constraintTop_toTopOf="@+id/tv_channel_clips" />
 
     <TextView
-        android:id="@+id/tv_channels_error"
+        android:id="@+id/tv_clips_error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="2"
         android:textAlignment="center"
+        android:visibility="gone"
         android:text="Ha ocurrido un error! \n Por favor verifica tu conexión a internet!"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pb_channels" />
+        app:layout_constraintTop_toBottomOf="@+id/pb_clips" />
 
     <Button
-        android:id="@+id/btn_load_channels_again"
+        android:id="@+id/btn_load_clips_again"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CARGAR"
+        android:visibility="gone"
         android:textColor="@color/white"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_channels_error"
-        app:layout_constraintStart_toStartOf="@+id/tv_channels_error"
-        app:layout_constraintTop_toBottomOf="@+id/tv_channels_error" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_clips_error"
+        app:layout_constraintStart_toStartOf="@+id/tv_clips_error"
+        app:layout_constraintTop_toBottomOf="@+id/tv_clips_error" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs'
 }
 
 def apikeyPropertiesFile = rootProject.file("apikey.properties")
@@ -59,6 +62,7 @@ dependencies {
 
     implementation"com.google.dagger:hilt-android:$hilt_version"
     implementation "com.google.dagger:hilt-android-compiler:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     //Coroutines
     implementation"org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
@@ -73,6 +77,9 @@ dependencies {
     // Gson
     implementation"com.google.code.gson:gson:$converter_gson"
 
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
@@ -84,8 +91,6 @@ dependencies {
     implementation "junit:junit:$jUnit"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     implementation "androidx.test:rules:$testRules_version"
-    implementation"org.mockito:mockito-inline:$mockito_inline_version"
-    //implementation "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version"
     implementation "androidx.arch.core:core-testing:$core_test_version"
 
 }
