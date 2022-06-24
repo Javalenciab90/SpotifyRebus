@@ -79,7 +79,7 @@ class ChannelClipsFragment : BaseFragment<FragmentChannelClipsBinding>(FragmentC
                         }
                     }
                     is StateResult.Failed -> {
-                        Toast.makeText(requireContext(), "No se puedo encontrar la lista!. Intenta nuevamente!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "No se pudo encontrar la lista!. Intenta nuevamente!", Toast.LENGTH_LONG).show()
                         with(binding) {
                             pbClips.showProgressBar()
                             tvClipsError.showTextError()

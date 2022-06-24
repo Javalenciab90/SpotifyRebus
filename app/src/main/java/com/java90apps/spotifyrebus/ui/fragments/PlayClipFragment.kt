@@ -34,6 +34,7 @@ class PlayClipFragment : BaseFragment<FragmentMediaPlayerBinding>(FragmentMediaP
                 .into(ivClip)
 
             tvTitle.text = args.clipToPlay.title
+            tvDescription.text = args.clipToPlay.description
 
             btnStop.setOnClickListener {
                 mediaPlayer.stop()
