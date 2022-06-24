@@ -14,14 +14,35 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/channelFragment"
-        android:name="com.java90apps.spotifyrebus.ui.fragments.ChannelFragment"
-        android:label="Channel"
+        android:name="com.java90apps.spotifyrebus.ui.fragments.ChannelClipsFragment"
+        android:label="Play List"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"/>
+        app:popExitAnim="@anim/slide_out_right">
+        <argument
+            android:name="channel_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_channelFragment_to_playClipFragment"
+            app:destination="@id/playClipFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/playClipFragment"
+        android:name="com.java90apps.spotifyrebus.ui.fragments.PlayClipFragment"
+        android:label="Media Player" >
+        <argument
+            android:name="clip_to_play"
+            app:argType="com.java90apps.spotifyrebus.domain.models.AudioClipModel" />
+    </fragment>
 </navigation>
