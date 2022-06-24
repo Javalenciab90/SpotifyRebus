@@ -3,8 +3,8 @@ package com.java90apps.spotifyrebus.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.java90apps.spotifyrebus.domain.base.BaseViewModel
+import com.java90apps.spotifyrebus.domain.models.AudioClipModel
 import com.java90apps.spotifyrebus.domain.models.CoroutineContextProvider
-import com.java90apps.spotifyrebus.domain.models.PlayListModel
 import com.java90apps.spotifyrebus.domain.models.StateResult
 import com.java90apps.spotifyrebus.domain.usecases.GetPlayListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,10 +18,10 @@ class ChannelPlayListViewModel @Inject constructor(
     private val getPlayListUseCase: GetPlayListUseCase
 ) : BaseViewModel(coroutineContextProvider) {
 
-    private val _playList = MutableLiveData<StateResult<PlayListModel>>()
-    val playList: LiveData<StateResult<PlayListModel>> = _playList
+    private val _playList = MutableLiveData<StateResult<List<AudioClipModel>>>()
+    val playList: LiveData<StateResult<List<AudioClipModel>>> = _playList
 
-    fun getPlayListChannel(channelId: Double) {
+    fun getPlayListChannel(channelId: Int) {
         launch {
             _playList.postValue(StateResult.Loading())
             try {

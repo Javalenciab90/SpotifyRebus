@@ -7,9 +7,7 @@ data class PlayListModel(
     @Expose
     @SerializedName("body")
     val body: PlayListBodyModel
-) {
-
-}
+)
 
 data class PlayListBodyModel(
     @Expose

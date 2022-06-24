@@ -1,6 +1,7 @@
 package com.java90apps.spotifyrebus.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -22,11 +23,14 @@ class ChannelClipsFragment : BaseFragment<FragmentChannelClipsBinding>(FragmentC
 
     private val viewModel by viewModels<ChannelPlayListViewModel>()
 
+    private val args: ChannelClipsFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setUpRecyclerView()
+        viewModel.getPlayListChannel(args.channelId)
+        //setUpRecyclerView()
         setUpObservers()
+        setUpListeners()
     }
 
     private fun setUpRecyclerView() {
@@ -37,7 +41,12 @@ class ChannelClipsFragment : BaseFragment<FragmentChannelClipsBinding>(FragmentC
 
     private fun setUpListeners() {
         binding.btnLoadClipsAgain.setOnClickListener {
-            //viewModel.getPlayListChannel()
+            viewModel.getPlayListChannel(args.channelId)
+            with(binding) {
+                pbClips.hideProgressBar()
+                tvClipsError.hideTextError()
+                btnLoadClipsAgain.hideRetryButton()
+            }
         }
     }
 
@@ -54,7 +63,7 @@ class ChannelClipsFragment : BaseFragment<FragmentChannelClipsBinding>(FragmentC
                             tvClipsError.hideTextError()
                             btnLoadClipsAgain.hideRetryButton()
 
-
+                            // TODO: Create and  Set the adpater
                         }
                     }
                     is StateResult.Failed -> {
